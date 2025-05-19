@@ -137,6 +137,24 @@ $(document).ready(function () {
             ajaxRequest("/execute/settings", { theme_mode: mode });
         });
     }
+
+    if ($("[data-trigger=logout]").length) {
+        $("[data-trigger=logout]").on("click", function () {
+            ajaxRequest("/executor/applicant/logout", {});
+        });
+    }
+
+    if ($(".data-table").length) {
+        $(".data-table").DataTable({
+            paging: true,
+            lengthChange: true,
+            searching: true,
+            ordering: true,
+            info: true,
+            autoWidth: true,
+            responsive: true,
+        });
+    }
 });
 
 function ajaxRequest(sUrl = "", sData = "", sLoadParent = "") {
@@ -154,6 +172,7 @@ function ajaxRequest(sUrl = "", sData = "", sLoadParent = "") {
             eval(result.js);
         },
         error: function (e) {
+            console.log(e);
             $(".div-loader").hide();
             _confirm(
                 "alert",
@@ -243,7 +262,7 @@ function _collectFields(parentForm) {
     return JSON.stringify(sJsonFields);
 }
 
-function _systemAlert(type, message) {
+function _systemAlert(type, message, fn) {
     let color = "";
     let icon = "";
     let title = "";
@@ -278,6 +297,7 @@ function _systemAlert(type, message) {
             confirm: {
                 text: "Okay",
                 btnClass: "btn btn-primary",
+                action: fn,
             },
         },
     });

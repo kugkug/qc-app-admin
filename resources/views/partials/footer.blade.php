@@ -39,4 +39,3 @@
 
 
 <script src="{{ asset('assets/adminlte3.2/dist/js/adminlte.js') }}"></script>
-<script src="{{ asset('assets/scripts/modules/scripts.js') }}"></script>
