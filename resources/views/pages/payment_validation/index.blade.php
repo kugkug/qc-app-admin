@@ -45,7 +45,7 @@
                                     <td class="text-center align-middle">
                                         <button class="btn btn-outline-info btn-flat btn-preview" 
                                             title="View Image"
-                                            data-image="{{ $app_url }} requirements/{{ $requirements[$requirement_type['id']]['photo'] }}"
+                                            data-image="{{ $app_url }}requirements/{{ $requirements[$requirement_type['id']]['photo'] }}"
                                             data-id="{{ $requirement_type['id'] }}"
                                         >
                                             <i class="fas fa-image"></i> 
@@ -81,7 +81,7 @@
                                     <td class="text-center align-middle">
                                         <button class="btn btn-outline-info btn-flat btn-payment-preview" 
                                             title="View Image"
-                                            data-image="{{ $app_url }} payments/{{ $payment_details['receipt']}}"                                            
+                                            data-image="{{ $app_url }}payments/{{ $payment_details['receipt']}}"                                            
                                         >
                                             <i class="fas fa-image"></i> 
                                         </button>
