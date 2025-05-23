@@ -32,11 +32,17 @@
                                             <td> 
                                                 {{ ucwords($application['user']['lastname']. " ".$application['user']['firstname'] .", ".$application['user']['middlename'] )}} 
                                             </td>
-                                            <td> {{$application['classification']['classification']}} </td>
+                                            <td>
+                                                @php
+                                                    echo ($application['classification']['classification']) ? $application['classification']['classification'] : "-";
+                                                @endphp
+                                            </td>
                                             <td> 
-                                                {{
-                                                    config('system.application_progress_status')[$application['application_status']]
-                                                }} 
+                                                @php
+                                                    echo ($application['application_status']) ? 
+                                                        config('system.application_progress_status')[$application['application_status']] :
+                                                        "New";
+                                                @endphp
                                             </td>
                                         </tr>
                                     @endforeach
