@@ -38,6 +38,8 @@
                                     $status_text = config('system.requirement_status')[$requirements[$requirement_type['id']]['status']];
                                     $status_class = config('system.requirement_status_class')[$status_text];
                                     $status = $requirements[$requirement_type['id']]['photo'] ? $status_text : 'No Upload'
+
+                                    $app_url = config('system.app_client_url');
                                 @endphp
                                 <tr>
                                     <td class="align-middle">{{ $requirement_type['title'] }}</td>
@@ -46,7 +48,7 @@
                                     <td class="text-center align-middle">
                                         <button class="btn btn-outline-info btn-flat btn-preview" 
                                             title="View Image"
-                                            data-image="http://127.0.0.1:8001/requirements/{{ $requirements[$requirement_type['id']]['photo'] }}"
+                                            data-image="{{ $app_url }}requirements/{{ $requirements[$requirement_type['id']]['photo'] }}"
                                             data-id="{{ $requirement_type['id'] }}"
                                         >
                                             <i class="fas fa-image"></i> 
