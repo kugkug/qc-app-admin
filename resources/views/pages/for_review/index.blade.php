@@ -16,6 +16,7 @@
                     
                             $approve_key = array_keys(config('system.requirement_status'), 'Completed')[0];
                             $reject_key = array_keys(config('system.requirement_status'), 'Requires Update')[0];
+                            $app_url = config('system.app_client_url');
                     
                             $requirements = [];
                             foreach ($application['requirements'] as $requirement) {
@@ -38,8 +39,6 @@
                                     $status_text = config('system.requirement_status')[$requirements[$requirement_type['id']]['status']];
                                     $status_class = config('system.requirement_status_class')[$status_text];
                                     $status = $requirements[$requirement_type['id']]['photo'] ? $status_text : 'No Upload'
-
-                                    $app_url = config('system.app_client_url');
                                 @endphp
                                 <tr>
                                     <td class="align-middle">{{ $requirement_type['title'] }}</td>
