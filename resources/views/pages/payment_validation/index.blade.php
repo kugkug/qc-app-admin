@@ -15,7 +15,7 @@
                         @php
                     
                             $approve_key = config('system.payment_status')['approved'];
-                    
+                            $app_url = config('system.app_client_url');
                             $requirements = [];
                             foreach ($application['requirements'] as $requirement) {
                                 $requirements[$requirement['requirement']] = $requirement;
@@ -45,7 +45,7 @@
                                     <td class="text-center align-middle">
                                         <button class="btn btn-outline-info btn-flat btn-preview" 
                                             title="View Image"
-                                            data-image="http://127.0.0.1:8001/requirements/{{ $requirements[$requirement_type['id']]['photo'] }}"
+                                            data-image="{{ $app_url }} requirements/{{ $requirements[$requirement_type['id']]['photo'] }}"
                                             data-id="{{ $requirement_type['id'] }}"
                                         >
                                             <i class="fas fa-image"></i> 
@@ -81,7 +81,7 @@
                                     <td class="text-center align-middle">
                                         <button class="btn btn-outline-info btn-flat btn-payment-preview" 
                                             title="View Image"
-                                            data-image="http://127.0.0.1:8001/payments/{{ $payment_details['receipt']}}"                                            
+                                            data-image="{{ $app_url }} payments/{{ $payment_details['receipt']}}"                                            
                                         >
                                             <i class="fas fa-image"></i> 
                                         </button>
