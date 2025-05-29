@@ -18,15 +18,18 @@ Route::middleware([
             Route::get("/for-review", [AdminModulesController::class, 'for_review'])->name('for_review');
             Route::get("/payment-created", [AdminModulesController::class, 'payment_created'])->name('payment_created');
             Route::get("/payment-validation", [AdminModulesController::class, 'payment_validation'])->name('payment_validation');
-            Route::get("/validated", [AdminModulesController::class, 'validated'])->name('validated');        
+            Route::get("/validated", [AdminModulesController::class, 'validated'])->name('validated');
+            Route::get("/head-approval", [AdminModulesController::class, 'head_approval'])->name('head_approval');
             Route::get("/rejected", [AdminModulesController::class, 'rejected'])->name('rejected');
             Route::get("/completed", [AdminModulesController::class, 'completed'])->name('completed');
             Route::get("/released", [AdminModulesController::class, 'released'])->name('released');
+
         });
         
         Route::group(['prefix' => 'application'], function() {
             Route::get("/for-review/{application_ref_no}", [AdminModulesController::class, 'review_application'])->name('review_application');
             Route::get("/payment-validation/{application_ref_no}", [AdminModulesController::class, 'review_payment'])->name('review_payment');
+            Route::get("/head-approval/{application_ref_no}", [AdminModulesController::class, 'review_approval'])->name('review_payment');
         });
         
         Route::get("/generate-report", [AdminModulesController::class, 'generate_report'])->name('generate_report');
@@ -47,8 +50,8 @@ Route::group(['prefix' => 'executor'], function() {
     Route::post('/login', [UserController::class, 'login'])->name('exec_login');
     Route::post('/logout', [UserController::class, 'logout'])->name('exec_logout');
 
-    Route::group(['prefix' => 'applicant'], function() {
-        
+    Route::group(['prefix' => 'head'], function() {
+        Route::post('approval/{req_id}', [ApplicationsController::class, 'approveApplication'])->name('api_update_requirement');
     });
 
     Route::group(['prefix' => 'requirement'], function() {

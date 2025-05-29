@@ -41,4 +41,18 @@ $(document).ready(function () {
             );
         });
     }
+
+    if ($(".btn-head-approve").length) {
+        $(".btn-head-approve").off();
+        $(".btn-head-approve").on("click", function (e) {
+            let data_ref_no = $(this).attr("data-ref-no");
+            let data_status = $(this).attr("data-status");
+
+            ajaxRequest(
+                "/executor/head/approval/" + data_ref_no,
+                { ApplicationStatus: data_status },
+                $(this)
+            );
+        });
+    }
 });

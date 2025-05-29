@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Application;
+use App\Models\History;
 use App\Models\Payment;
 use App\Models\Requirements;
 use Exception;
@@ -60,6 +61,13 @@ class ApplicationsController extends Controller
             if ($application) {
                 $application->update($validated['validated']);
                 $updated = $application->refresh();
+
+                if(isset($validated['validated']['application_status'])) {
+                    History::create([
+                        'application_id' => $application['id'],
+                        'timeline_look_up_id' => $validated['validated']['application_status'],
+                    ]);
+                }
 
                 DB::commit();
 
@@ -164,6 +172,7 @@ class ApplicationsController extends Controller
             Payment::updateOrCreate(['application_ref_no' => $ref_no], $validated['validated']);
 
             $application = globalHelper()->getApplicationViaRefNo($ref_no);
+
             globalHelper()->logHistory($application['id'], 'Payment Validation');
             
             DB::commit();
@@ -178,7 +187,5 @@ class ApplicationsController extends Controller
             return ['status' => false];
             
         }
-    }
-
-    
+    }    
 }

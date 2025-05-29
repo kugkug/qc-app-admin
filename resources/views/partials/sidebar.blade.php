@@ -94,13 +94,22 @@
 		</li>
 
 		<li class="nav-item">
-		<a href="/admin/generate_report" class="nav-link">
-			<i class="nav-icon fas fa-file-excel"></i>
-			<p>
-			Generate Report
-			</p>
-		</a>
+			<a href="/applications/head-approval" class="nav-link">
+				<i class="nav-icon fas fa-user-tie"></i>
+				<p>
+				Head Approval
+				</p>
+			</a>
 		</li>
+		<li class="nav-item">
+			<a href="/admin/generate_report" class="nav-link">
+				<i class="nav-icon fas fa-file-excel"></i>
+				<p>
+				Generate Report
+				</p>
+			</a>
+		</li>
+		
 		<li class="nav-item">
 		{{-- <a href="/execute/logout" class="nav-link"> --}}
 			<a href="/" class="nav-link">

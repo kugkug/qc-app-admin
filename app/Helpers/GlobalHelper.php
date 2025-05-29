@@ -57,7 +57,7 @@ class GlobalHelper {
 
     public function updateApplicationStatusViaRefNo(string $ref_no, int $status): void {
         try {
-            Application::where('application_ref_no', $ref_no)->update(['status' => $status]);
+            Application::where('application_ref_no', $ref_no)->update(['application_status' => $status]);
         } catch (Exception $e) {
             Log::channel('info')->info(json_encode($e->getMessage()));
         }

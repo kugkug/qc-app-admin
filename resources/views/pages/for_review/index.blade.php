@@ -33,27 +33,39 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                            
                             @foreach ($global_requirement_types as $requirement_type)
-                                @php
-                                    $status_text = config('system.requirement_status')[$requirements[$requirement_type['id']]['status']];
-                                    $status_class = config('system.requirement_status_class')[$status_text];
-                                    $status = $requirements[$requirement_type['id']]['photo'] ? $status_text : 'No Upload'
-                                @endphp
-                                <tr>
-                                    <td class="align-middle">{{ $requirement_type['title'] }}</td>
-                                    <td class="text-center align-middle td-status {{ $status_class }}" id="td-status-{{$requirement_type['id']}}"> {{ $status }}
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        <button class="btn btn-outline-info btn-flat btn-preview" 
-                                            title="View Image"
-                                            data-image="{{ $app_url }}requirements/{{ $requirements[$requirement_type['id']]['photo'] }}"
-                                            data-id="{{ $requirement_type['id'] }}"
-                                        >
-                                            <i class="fas fa-image"></i> 
-                                        </button>
-                                    </td>
-                                </tr>
+                                @if ($requirements)
+                                    @php
+                                        $status_text = config('system.requirement_status')[$requirements[$requirement_type['id']]['status']];
+                                        $status_class = config('system.requirement_status_class')[$status_text];
+                                        $status = $requirements[$requirement_type['id']]['photo'] ? $status_text : 'No Upload'
+                                    @endphp
+                                    <tr>
+                                        <td class="align-middle">{{ $requirement_type['title'] }}</td>
+                                        <td class="text-center align-middle td-status {{ $status_class }}" id="td-status-{{$requirements[$requirement_type['id']]['id']}}"> 
+                                            {{ $status }}
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <button class="btn btn-outline-info btn-flat btn-preview" 
+                                                title="View Image"
+                                                data-image="{{ $app_url }}requirements/{{ $requirements[$requirement_type['id']]['photo'] }}"
+                                                data-id="{{ $requirements[$requirement_type['id']]['id'] }}"
+                                            >
+                                                <i class="fas fa-image"></i> 
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td class="align-middle">{{ $requirement_type['title'] }}</td>
+                                        <td class="text-center align-middle td-status" > No Upload
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            -
+                                        </td>
+                                    </tr>
+                                @endif
 
                             @endforeach
 

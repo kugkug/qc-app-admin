@@ -29,7 +29,7 @@ return [
         4 => 'Payment Created',
         5 => 'Payment Validated',
         6 => 'Ongoing Seminar',
-        7 => 'Foir Head Approval',
+        7 => 'For Head Approval',
         8 => 'Released',
         98 => 'Rejected',
         99 => 'Completed',

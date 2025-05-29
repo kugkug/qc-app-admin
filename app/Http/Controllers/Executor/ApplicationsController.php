@@ -38,7 +38,6 @@ class ApplicationsController extends Controller
                     enablePaymentOrder();
                 ";
             }
-            
 
             return globalHelper()->ajaxSuccessResponse($html_response);
 
@@ -59,6 +58,11 @@ class ApplicationsController extends Controller
                     globalHelper()->ajaxErrorResponse('');
             }
 
+            globalHelper()->updateApplicationStatusViaRefNo(
+                $ref_no, 
+                config('system.application_status')['created_payment']
+            );
+            
             $html_response = "$('#modal-payment-order').modal('hide'); _systemAlert('info', 'Payment Order Created!')";
             return globalHelper()->ajaxSuccessResponse($html_response);
 
@@ -79,7 +83,32 @@ class ApplicationsController extends Controller
                     globalHelper()->ajaxErrorResponse('');
             }
 
+            globalHelper()->updateApplicationStatusViaRefNo(
+                $ref_no, 
+                config('system.application_status')['validated_payment']
+            );
+            
             $html_response = "$('#modal-payment-preview').modal('hide'); _systemAlert('info', 'Payment Validated!')";
+            return globalHelper()->ajaxSuccessResponse($html_response);
+
+        } catch (Exception $e) {
+            Log::channel('info')->info($e->getMessage(), $e->getTrace());
+            return globalHelper()->ajaxErrorResponse('');
+        }
+    }
+
+    public function approveApplication($ref_no, Request $request) {
+        
+        try {
+            $response = apiHelper()->execute($request, "/api/applications/update/$ref_no", 'POST');
+            
+            if ($response['status'] == false) {
+                return isset($response['response']) ? 
+                    globalHelper()->ajaxErrorResponse($response['response']) :
+                    globalHelper()->ajaxErrorResponse('');
+            }
+            
+            $html_response = "_systemAlert('info', 'Application Approved!')";
             return globalHelper()->ajaxSuccessResponse($html_response);
 
         } catch (Exception $e) {

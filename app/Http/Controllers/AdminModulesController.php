@@ -78,7 +78,30 @@ class AdminModulesController extends Controller {
     
     
 
+    public function head_approval() {
+        $applications = globalHelper()->getApplicationsViaStatus(config('system.application_status')['seminar']);
+        
+        $this->data['applications'] = $applications['applications'];
+        $this->data['page_name'] = 'Applications - Head Approval';
 
+        // return view('pages.payment_validation.index')->with(['page_name' => 'Payment Validation']);
+        
+        return view('pages.applications.head-approval', $this->data);   
+    }
+
+    public function review_approval($application_ref_no) {
+        
+        $application = globalHelper()->getApplicationViaRefNo($application_ref_no);
+
+        $this->data['application'] = $application;
+        $this->data['payment_details'] = globalHelper()->getPaymentDetails($application_ref_no);
+        $this->data['application_ref_no'] = $application_ref_no;
+        $this->data['payment_types'] = globalHelper()->getPaymentTypes();
+        $this->data['page_name'] = 'Applications - Head Approval';
+        
+        return view('pages.head_approval.index', $this->data);
+    }
+    
     
     
     public function rejected() {

@@ -1,6 +1,6 @@
 @include('partials.header')
 
-    <div class="content">
+    <div class="content pb-2">
         <div class="card rounded-0 shadow-lg">
             <div class="card-header">
                 <h3 class="card-title">
@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         @php
-                    
+                            $approve_app_status = config('system.application_status')['released'];
                             $approve_key = config('system.payment_status')['approved'];
                             $app_url = config('system.app_client_url');
                             $requirements = [];
@@ -22,7 +22,7 @@
                             }
 
                         @endphp
-                        {{-- <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th class="text-center" width="60%">Requirements</th>
@@ -39,8 +39,11 @@
                                     $status = $requirements[$requirement_type['id']]['photo'] ? $status_text : 'No Upload'
                                 @endphp
                                 <tr>
-                                    <td class="align-middle">{{ $requirement_type['title'] }}</td>
-                                    <td class="text-center align-middle td-status {{ $status_class }}" id="td-status-{{$requirement_type['id']}}"> {{ $status }}
+                                    <td class="align-middle">
+                                        {{ $requirement_type['title'] }}
+                                    </td>
+                                    <td class="text-center align-middle td-status {{ $status_class }}" id="td-status-{{$requirement_type['id']}}"> 
+                                        {{ $status }}
                                     </td>
                                     <td class="text-center align-middle">
                                         <button class="btn btn-outline-info btn-flat btn-preview" 
@@ -56,7 +59,7 @@
                             @endforeach
 
                             </tbody>
-                        </table> --}}
+                        </table>
                     </div>
                 </div>
                 @if($payment_details)
@@ -92,6 +95,19 @@
                         </div>
                     </div>
                 @endif
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                    
+                <button class="btn btn-outline-danger btn-flat btn-require-update">
+                    Reject Application
+                </button>
+                <button 
+                    class="btn btn-outline-success btn-flat btn-head-approve" 
+                    data-status="{{ $approve_app_status }}"
+                    data-ref-no="{{ $application_ref_no }}"
+                >
+                    Approve
+                </button>
             </div>
         </div>
     </div>
@@ -154,18 +170,7 @@
                     </div>
 
                 </div>
-                <div class="modal-footer d-flex justify-content-between">
-                    <button 
-                        class="btn btn-outline-success btn-flat btn-approve" 
-                        data-status="{{ $approve_key }}"
-                        data-ref-no="{{ $application_ref_no }}"
-                    >
-                        Approve
-                    </button>
-                    {{-- <button class="btn btn-outline-danger btn-flat btn-require-update">
-                        Requires Update
-                    </button> --}}
-                </div>
+                
             </div>
         </div>
     </div>
