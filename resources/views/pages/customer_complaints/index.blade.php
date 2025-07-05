@@ -73,8 +73,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <h6><strong>Customer Information:</strong></h6>
-                            <p><strong>Name:</strong> <font class="text-uppercase customer-name">{{ ucwords($complaint['user']['lastname'] . ' ' . $complaint['user']['firstname'] . ' ' . $complaint['user']['middlename']) }}</font></p>
-                            <p><strong>Email:</strong><font class="customer-email">{{ $complaint['user']['email'] }}</font></p>
+                            <p><strong>Name:</strong> <font class="text-uppercase customer-name"></font></p>
+                            <p><strong>Email:</strong><font class="customer-email"></font></p>
                         </div>
                         <div class="col-md-6">
                             <h6><strong>Complaint Information:</strong></h6>
