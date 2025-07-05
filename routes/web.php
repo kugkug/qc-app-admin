@@ -23,7 +23,7 @@ Route::middleware([
             Route::get("/rejected", [AdminModulesController::class, 'rejected'])->name('rejected');
             Route::get("/completed", [AdminModulesController::class, 'completed'])->name('completed');
             Route::get("/released", [AdminModulesController::class, 'released'])->name('released');
-
+            Route::get("/customer-complaints", [AdminModulesController::class, 'customer_complaints'])->name('customer_complaints');
         });
         
         Route::group(['prefix' => 'application'], function() {

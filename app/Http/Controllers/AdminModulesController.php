@@ -126,5 +126,14 @@ class AdminModulesController extends Controller {
     public function generate_report() {
         return view('pages.generate_report.index')->with(['page_name' => 'Generate Report']);
     }
+
+    public function customer_complaints() {
+        $complaints = globalHelper()->getComplaints();
+
+        $this->data['complaints'] = $complaints['complaints'];
+        $this->data['page_name'] = 'Customer Complaints';
+
+        return view('pages.customer_complaints.index', $this->data);
+    }
     
 }

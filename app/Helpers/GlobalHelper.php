@@ -6,6 +6,7 @@ namespace App\Helpers;
 use App\Http\Controllers\Api\ApplicationsController;
 use App\Models\Application;
 use App\Models\Applications;
+use App\Models\Complaint;
 use App\Models\History;
 use App\Models\Payment;
 use App\Models\PaymentLookUp;
@@ -272,6 +273,32 @@ class GlobalHelper {
         } catch (Exception $e) { 
             Log::channel('info')->info(json_encode($e->getMessage()));
             return []; 
+        }
+    }
+
+    public function getComplaints() {
+        try {
+            $complaints = Complaint::orderBy('created_at', 'desc')
+            ->with('user')
+            ->get()->toArray();
+
+            if ($complaints) {
+                return [
+                    'status' => true,
+                    'complaints' => $complaints,
+                ];
+            }
+
+            return [
+                'status' => false,
+                'complaints' => [],
+            ];
+        } catch (Exception $e) { 
+            Log::channel('info')->info(json_encode($e->getMessage()));
+            return [
+                'status' => false,
+                'complaints' => [],
+            ];
         }
     }
 }

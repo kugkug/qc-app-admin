@@ -75,7 +75,7 @@
 				</a>
 				</li>
 				<li class="nav-item">
-				<a href="/admin/completed" class="nav-link">
+				<a href="/applications/completed" class="nav-link">
 					<i class="far fa-circle nav-icon"></i>
 					<p>
 					Completed
@@ -83,7 +83,7 @@
 				</a>
 				</li>
 				<li class="nav-item">
-				<a href="/admin/released" class="nav-link">
+				<a href="/applications/released" class="nav-link">
 					<i class="far fa-circle nav-icon"></i>
 					<p>
 					Released
@@ -102,10 +102,19 @@
 			</a>
 		</li>
 		<li class="nav-item">
-			<a href="/admin/generate_report" class="nav-link">
+			<a href="/applications/generate_report" class="nav-link">
 				<i class="nav-icon fas fa-file-excel"></i>
 				<p>
 				Generate Report
+				</p>
+			</a>
+		</li>
+
+		<li class="nav-item">
+			<a href="/applications/customer-complaints" class="nav-link">
+				<i class="nav-icon fas fa-user-injured"></i>
+				<p>
+				Customer Complaints
 				</p>
 			</a>
 		</li>
