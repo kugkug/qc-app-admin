@@ -36,10 +36,10 @@
                                                 {{ $application['classification']['classification'] }}
                                             </td>
                                             <td class="align-middle">
-                                                <a href="/application/payment-validation/{{$application['application_ref_no']}}" 
+                                                <a href="/application/payment-created/{{$application['application_ref_no']}}" 
                                                     class="btn btn-outline-primary btn-flat"
                                                 >
-                                                    Validate
+                                                    View
                                                 </a>
                                             </td>
                                         </tr>

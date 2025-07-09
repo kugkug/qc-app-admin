@@ -53,7 +53,7 @@ class AdminModulesController extends Controller {
     }
 
     public function payment_validation() {
-        $applications = globalHelper()->getApplicationsViaStatus(config('system.application_status')['validated_payment']);
+        $applications = globalHelper()->getApplicationsViaStatus(config('system.application_status')['created_payment']);
         
         $this->data['applications'] = $applications['applications'];
         $this->data['page_name'] = 'Applications - Payment Validations';
@@ -63,6 +63,21 @@ class AdminModulesController extends Controller {
         return view('pages.applications.payment-validation', $this->data);   
     }
 
+
+
+    public function view_payment_created($application_ref_no) {
+        
+        $application = globalHelper()->getApplicationViaRefNo($application_ref_no);
+
+        $this->data['application'] = $application;
+        $this->data['payment_details'] = globalHelper()->getPaymentDetails($application_ref_no);
+        $this->data['application_ref_no'] = $application_ref_no;
+        $this->data['payment_types'] = globalHelper()->getPaymentTypes();
+        $this->data['page_name'] = 'Applications - Payment Validation';
+        
+        return view('pages.payment_created.index', $this->data);
+    }
+    
     public function review_payment($application_ref_no) {
         
         $application = globalHelper()->getApplicationViaRefNo($application_ref_no);

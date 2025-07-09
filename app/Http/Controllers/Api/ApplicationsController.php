@@ -95,7 +95,7 @@ class ApplicationsController extends Controller
         DB::beginTransaction();
         try {
             
-            $validated = validatorHelper()->validate('update_requirements', $request);
+            $validated = validatorHelper()->validate('update_requirements', $request); 
 
             if (! $validated['status']) {
                 return $validated;
@@ -113,7 +113,7 @@ class ApplicationsController extends Controller
             Log::channel('info')->info(json_encode($e->getMessage()));
             DB::rollBack();
             
-            return ['status' => false];
+            return ['status' => false, 'response' => $e->getMessage()];
             
         }
 

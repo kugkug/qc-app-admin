@@ -13,31 +13,42 @@ class ApplicationsController extends Controller
     public function updateRequirement($req_id, Request $request) {
         
         try {
-            $response = apiHelper()->execute($request, "/api/requirement/update/$req_id", 'POST');
+            $response = apiHelper()->execute($request, "/api/requirement/update/$req_id", 'POST'); 
+            
             if ($response['status'] == false) {
                 return isset($response['response']) ? 
                     globalHelper()->ajaxErrorResponse($response['response']) :
                     globalHelper()->ajaxErrorResponse('');
             }
 
+            $html_response = "location.reload();";
             if ((int) $request->Status === array_keys(config('system.requirement_status'), 'Completed')[0]) {
-                $html_response = "
-                    $('#td-status-' + $req_id).html(\"<font class='text-success strong'>Completed</font>\");
-                    $('#modal-preview').modal('hide');
-        
-                    enablePaymentOrder();
-                ";
-                
+
             } else {
-                $html_response = "
-                    $('#td-status-' + $req_id).html(\"<font class='text-danger strong'>Requires Update</font>\");
+                globalHelper()->updateApplicationStatusViaRefNo(
+                    $request->RefNo, 
+                    config('system.application_status')['uploaded_requirements']
+                );
 
-                    $('#modal-notes').modal('hide');
-                    $('#modal-preview').modal('hide');
-
-                    enablePaymentOrder();
-                ";
             }
+            // if ((int) $request->Status === array_keys(config('system.requirement_status'), 'Completed')[0]) {
+            //     $html_response = "
+            //         $('#td-status-' + $req_id).html(\"<font class='text-success strong'>Completed</font>\");
+            //         $('#modal-preview').modal('hide');
+        
+            //         enablePaymentOrder();
+            //     ";
+                
+            // } else {
+            //     $html_response = "
+            //         $('#td-status-' + $req_id).html(\"<font class='text-danger strong'>Requires Update</font>\");
+
+            //         $('#modal-notes').modal('hide');
+            //         $('#modal-preview').modal('hide');
+
+            //         enablePaymentOrder();
+            //     ";
+            // }
 
             return globalHelper()->ajaxSuccessResponse($html_response);
 

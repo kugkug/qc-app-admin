@@ -5,6 +5,9 @@
             <div class="card-header">
                 <h3 class="card-title">
                     Card Title
+
+                    
+                    <input type="hidden" data-key="RefNo" value="{{ $application['application_ref_no'] }}">
                 </h3>
             </div>
             <div class="card-body">
@@ -13,8 +16,10 @@
                 <div class="row">
                     <div class="col-md-12">
                         @php
+            
                             $approve_app_status = config('system.application_status')['released'];
                             $approve_key = config('system.payment_status')['approved'];
+                            $reject_key = array_keys(config('system.requirement_status'), 'Requires Update')[0];
                             $app_url = config('system.app_client_url');
                             $requirements = [];
                             foreach ($application['requirements'] as $requirement) {
@@ -31,7 +36,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                             @foreach ($global_requirement_types as $requirement_type)
                                 @php
                                     $status_text = config('system.requirement_status')[$requirements[$requirement_type['id']]['status']];
@@ -49,7 +53,7 @@
                                         <button class="btn btn-outline-info btn-flat btn-preview" 
                                             title="View Image"
                                             data-image="{{ $app_url }}requirements/{{ $requirements[$requirement_type['id']]['photo'] }}"
-                                            data-id="{{ $requirement_type['id'] }}"
+                                            data-id="{{ $requirements[$requirement_type['id']]['id'] }}"
                                         >
                                             <i class="fas fa-image"></i> 
                                         </button>
@@ -122,7 +126,42 @@
                     </button>
                 </div>
                 <div class="modal-body d-flex justify-content-center align-items-center" style="min-height: 60vh !important;"></div>
-                
+                <div class="modal-footer d-flex justify-content-between">
+                    
+                    <button 
+                        class="btn btn-outline-success btn-flat btn-approve" 
+                        data-status="{{ $approve_key }}"
+                    >
+                        Approve
+                    </button>
+                    <button class="btn btn-outline-danger btn-flat btn-require-update">
+                        Requires Update
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog"  id="modal-notes">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Note</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>×</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex justify-content-center align-items-center">
+                    <textarea class="form-control rounded-0" cols="30" rows="10" data-key="Notes"></textarea>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button 
+                        class="btn btn-outline-danger btn-flat btn-block btn-submit-note"
+                        data-status="{{ $reject_key }}"
+                    >
+                        Submit Note
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -177,4 +216,4 @@
 
 @include('partials.footer')
 <script src="{{ asset('assets/scripts/modules/scripts.js') }}"></script>
-<script src="{{ asset('assets/scripts/modules/health/payment-validation.js') }}"></script>
+<script src="{{ asset('assets/scripts/modules/health/head-approval.js') }}"></script>

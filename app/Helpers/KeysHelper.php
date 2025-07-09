@@ -26,6 +26,7 @@ class KeysHelper {
 
         'UserId' => 'user_id',
         'ApplicationRefNo' => 'application_ref_no',
+        'RefNo' => 'ref_no',
         'ClassificationId' => 'classification_id',
         'ApplicationTypeId' => 'application_type_id',
         'IndustryId' => 'industry_id',

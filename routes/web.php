@@ -29,6 +29,7 @@ Route::middleware([
         Route::group(['prefix' => 'application'], function() {
             Route::get("/for-review/{application_ref_no}", [AdminModulesController::class, 'review_application'])->name('review_application');
             Route::get("/payment-validation/{application_ref_no}", [AdminModulesController::class, 'review_payment'])->name('review_payment');
+            Route::get("/payment-created/{application_ref_no}", [AdminModulesController::class, 'view_payment_created'])->name('view_payment_created');
             Route::get("/head-approval/{application_ref_no}", [AdminModulesController::class, 'review_approval'])->name('review_payment');
         });
         
