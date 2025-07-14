@@ -9,7 +9,7 @@
                 </h3>
             </div>
             <div class="card-body">
-                @include('components.information')
+                @include('components.business-information')
                 <div class="row">
                     <div class="col-md-12">
                         @php
@@ -19,7 +19,7 @@
                             $app_url = config('system.app_client_url');
                     
                             $requirements = [];
-                            foreach ($application['requirements'] as $requirement) {
+                            foreach ($business['requirements'] as $requirement) {
                                 $requirements[$requirement['requirement']] = $requirement;
                             }
 
@@ -32,9 +32,9 @@
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody> 
                             
-                            @foreach ($global_requirement_types as $requirement_type)
+                            @foreach ($business_requirement_types as $requirement_type)
                                 @if ($requirements)
                                     @php
                                         $status_text = config('system.requirement_status')[$requirements[$requirement_type['id']]['status']];
@@ -81,7 +81,13 @@
                     </div>
                     <div class="col-md-6 d-flex justify-content-end ">
                         {{-- <button class="btn btn-outline-danger btn-flat mr-2">Requires Update</button> --}}
-                        <button class="btn btn-outline-primary btn-flat btn-payment-order" data-status="Completed" disabled="">Proceed Order of Payment</button>
+                        <button class="btn btn-outline-primary btn-flat btn-submit-payment-order" 
+                            data-status="Completed" 
+                            data-ref-no="{{ $application_ref_no }}"
+                            disabled=""
+                        >
+                            Proceed Order of Payment
+                        </button>
                     </div>
                 </div>
             </div>
@@ -103,6 +109,7 @@
                     <button 
                         class="btn btn-outline-success btn-flat btn-approve" 
                         data-status="{{ $approve_key }}"
+                        data-ref-no="{{ $application_ref_no }}"
                     >
                         Approve
                     </button>
@@ -204,8 +211,7 @@
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
                     <button 
-                        class="btn btn-outline-primary btn-flat btn-block btn-submit-payment-order"
-                        data-ref-no="{{ $application_ref_no }}"
+                        class="btn btn-outline-primary btn-flat btn-block"
                     >
                         Create Order of Payment
                     </button>
@@ -216,4 +222,4 @@
 
 @include('partials.footer')
 <script src="{{ asset('assets/scripts/modules/scripts.js') }}"></script>
-<script src="{{ asset('assets/scripts/modules/health/upload-requirements.js') }}"></script>
+<script src="{{ asset('assets/scripts/modules/sanitary/upload-requirements.js') }}"></script>

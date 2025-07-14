@@ -132,6 +132,18 @@ class ValidatorHelper {
                     'status' => 'sometimes|integer',
                 ];
             break;
+
+            case 'business_update':
+                return [
+                    'application_type_id' => 'sometimes|integer',
+                    'industry_id' => 'sometimes|integer',
+                    'sub_industry_id' => 'sometimes|integer',
+                    'business_line_id' => 'sometimes|integer',
+                    'company_name' => 'sometimes|string',
+                    'company_address' => 'sometimes|string',
+                    'application_status' => 'sometimes|integer',
+                ];
+            break;
             
         }
     }

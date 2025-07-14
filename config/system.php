@@ -15,6 +15,7 @@ return [
         'validated_requirements' => 3,
         'created_payment' => 4,
         'validated_payment' => 5,
+        'water_analysis' => 6,
         'seminar' => 6,
         'head_approval' => 7,
         'released' => 8,

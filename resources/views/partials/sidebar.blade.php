@@ -30,10 +30,10 @@
 			</a>
 		</li>
 		<li class="nav-item">
-			<a href="#" class="nav-link active">
-				<i class="nav-icon fas fa-users"></i>
+			<a href="#" class="nav-link">
+				<i class="nav-icon far fa-id-card"></i>
 				<p>
-					Applications
+					Health Certificates
 					<i class="right fas fa-angle-left"></i>
 				</p>
 			</a>
@@ -41,7 +41,7 @@
 				<li class="nav-item">
 					<a href="/applications/all" class="nav-link">
 						<i class="far fa-circle nav-icon"></i>
-						<p>All</p>
+						<p>Applications</p>
 					</a>
 				</li>
 				<li class="nav-item">
@@ -83,24 +83,96 @@
 				</a>
 				</li>
 				<li class="nav-item">
-				<a href="/applications/released" class="nav-link">
-					<i class="far fa-circle nav-icon"></i>
-					<p>
-					Released
-					</p>
-				</a>
+					<a href="/applications/released" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>
+							Released
+						</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/applications/head-approval" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>
+							Head Approval
+						</p>
+					</a>
 				</li>
 			</ul>
 		</li>
 
 		<li class="nav-item">
-			<a href="/applications/head-approval" class="nav-link">
-				<i class="nav-icon fas fa-user-tie"></i>
+			<a href="#" class="nav-link">
+				<i class="nav-icon fas fa-file-medical"></i>
 				<p>
-				Head Approval
+					Sanitary Permits
+					<i class="right fas fa-angle-left"></i>
 				</p>
 			</a>
+			<ul class="nav nav-treeview">
+				<li class="nav-item">
+					<a href="/businesses/all" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>Applications</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/businesses/for-review" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>For Review</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/businesses/payment-created" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>Payment Created</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/businesses/payment-validation" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>Payment Validation</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/businesses/validated" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>Validated</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/businesses/rejected" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>Rejected</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/businesses/completed" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>
+							Completed
+						</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/businesses/released" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>
+						Released
+						</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/businesses/head-approval" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>
+							Head Approval
+						</p>
+					</a>
+				</li>
+			</ul>
 		</li>
+
 		<li class="nav-item">
 			<a href="/applications/generate_report" class="nav-link">
 				<i class="nav-icon fas fa-file-excel"></i>

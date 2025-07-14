@@ -6,14 +6,13 @@ use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
-class ApplicationsController extends Controller
+class BusinessController extends Controller
 {
     public function updateRequirement($req_id, Request $request) {
         
         try {
-            $response = apiHelper()->execute($request, "/api/requirement/update/$req_id", 'POST'); 
+            $response = apiHelper()->execute($request, "/api/requirement/business-update/$req_id", 'POST'); 
             
             if ($response['status'] == false) {
                 return isset($response['response']) ? 
@@ -23,13 +22,12 @@ class ApplicationsController extends Controller
 
             $html_response = "location.reload();";
             if ((int) $request->Status === array_keys(config('system.requirement_status'), 'Completed')[0]) {
-
+                
             } else {
                 globalHelper()->updateApplicationStatusViaRefNo(
                     $request->RefNo, 
                     config('system.application_status')['uploaded_requirements']
                 );
-
             }
 
             return globalHelper()->ajaxSuccessResponse($html_response);
@@ -41,9 +39,8 @@ class ApplicationsController extends Controller
     }
 
     public function createPaymentOrder($ref_no, Request $request) {
-        
         try {
-            $response = apiHelper()->execute($request, "/api/payment/create-order/$ref_no", 'POST');
+            $response = apiHelper()->execute($request, "/api/payment/business-create/$ref_no", 'POST');
 
             if ($response['status'] == false) {
                 return isset($response['response']) ? 
@@ -51,7 +48,7 @@ class ApplicationsController extends Controller
                     globalHelper()->ajaxErrorResponse('');
             }
 
-            globalHelper()->updateApplicationStatusViaRefNo(
+            globalHelper()->updateBusinessStatusViaRefNo(
                 $ref_no, 
                 config('system.application_status')['created_payment']
             );
@@ -68,7 +65,7 @@ class ApplicationsController extends Controller
     public function updatePaymentOrder($ref_no, Request $request) {
         
         try {
-            $response = apiHelper()->execute($request, "/api/payment/update/$ref_no", 'POST');
+            $response = apiHelper()->execute($request, "/api/payment/business-update/$ref_no", 'POST');
 
             if ($response['status'] == false) {
                 return isset($response['response']) ? 
@@ -76,7 +73,7 @@ class ApplicationsController extends Controller
                     globalHelper()->ajaxErrorResponse('');
             }
 
-            globalHelper()->updateApplicationStatusViaRefNo(
+            globalHelper()->updateBusinessStatusViaRefNo(
                 $ref_no, 
                 config('system.application_status')['validated_payment']
             );
@@ -93,7 +90,7 @@ class ApplicationsController extends Controller
     public function approveApplication($ref_no, Request $request) {
         
         try {
-            $response = apiHelper()->execute($request, "/api/applications/update/$ref_no", 'POST');
+            $response = apiHelper()->execute($request, "/api/businesses/update/$ref_no", 'POST');
             
             if ($response['status'] == false) {
                 return isset($response['response']) ? 
