@@ -63,10 +63,20 @@ class ApplicationsController extends Controller
                 $updated = $application->refresh();
 
                 if(isset($validated['validated']['application_status'])) {
+                    
+                    if ( $validated['validated']['application_status'] == config('system.application_status')['released']) {
+                        History::create([
+                            'application_ref_no' => $ref_no,
+                            'timeline_look_up_id' => globalHelper()->getTimelineIdViaName('Head Approval'),
+                        ]);
+                    }
+
                     History::create([
-                        'application_id' => $application['id'],
+                        'application_ref_no' => $ref_no,
                         'timeline_look_up_id' => $validated['validated']['application_status'],
                     ]);
+
+                    
                 }
 
                 DB::commit();
@@ -122,7 +132,6 @@ class ApplicationsController extends Controller
     public function createPaymentOrder($ref_no, Request $request) {
         DB::beginTransaction();
         try {
-            
             $validated = validatorHelper()->validate('create_payment_order', $request);
 
             if (! $validated['status']) {
@@ -143,7 +152,7 @@ class ApplicationsController extends Controller
             
             Payment::updateOrCreate(['application_ref_no' => $ref_no], $validated['validated']);
             
-            globalHelper()->logHistory($application['id'], 'Requirements Validation');
+            globalHelper()->logHistory($ref_no, 'Requirements Validation');
 
             DB::commit();
 
@@ -173,7 +182,7 @@ class ApplicationsController extends Controller
 
             $application = globalHelper()->getApplicationViaRefNo($ref_no);
 
-            globalHelper()->logHistory($application['id'], 'Payment Validation');
+            globalHelper()->logHistory($ref_no, 'Payment Validation');
             
             DB::commit();
 

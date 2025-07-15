@@ -64,7 +64,7 @@ class BusinessController extends Controller
             
             Payment::updateOrCreate(['application_ref_no' => $ref_no], $payment_data);
             
-            globalHelper()->logHistory($business['id'], 'Order of Payment');
+            globalHelper()->logHistory($ref_no, 'Requirements Validation');
 
             DB::commit();
 
@@ -94,7 +94,7 @@ class BusinessController extends Controller
 
             $business = globalHelper()->getBusinessViaRefNo($ref_no);
 
-            globalHelper()->logHistory($business['id'], 'Payment Validation');
+            globalHelper()->logHistory($ref_no, 'Payment Validation');
             
             DB::commit();
 
@@ -130,8 +130,15 @@ class BusinessController extends Controller
                 $updated = $application->refresh();
 
                 if(isset($validated['validated']['application_status'])) {
+                    if ( $validated['validated']['application_status'] == config('system.application_status')['released']) {
+                        History::create([
+                            'application_ref_no' => $ref_no,
+                            'timeline_look_up_id' => globalHelper()->getBusinessTimelineIdViaName('Head Approval'),
+                        ]);
+                    }
+                    
                     History::create([
-                        'application_id' => $application['id'],
+                        'application_ref_no' => $ref_no,
                         'timeline_look_up_id' => $validated['validated']['application_status'],
                     ]);
                 }

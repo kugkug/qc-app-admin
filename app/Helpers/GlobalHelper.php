@@ -286,10 +286,10 @@ class GlobalHelper {
         }
     }
 
-    public function logHistory(int $application_id, string $timeline): void {
+    public function logHistory(string $ref_no, string $timeline): void {
         try {
             History::create([
-                'application_id' => $application_id,
+                'application_ref_no' => $ref_no,
                 'timeline_look_up_id' => $this->getTimelineIdViaName($timeline),
             ]);
         } catch (Exception $e) {
@@ -297,10 +297,10 @@ class GlobalHelper {
         }
     }
 
-    public function getHistory(int $application_id): array {
+    public function getHistory(string $ref_no): array {
         try {
             $app_histories = [];
-            $histories = History::where('application_id', $application_id)->get();
+            $histories = History::where('application_ref_no', $ref_no)->get();
             
             if ($histories) {
                 foreach($histories as $history) {
@@ -309,6 +309,7 @@ class GlobalHelper {
             }
             
             return $app_histories;
+            
         } catch (Exception $e) {
             Log::channel('info')->info(json_encode($e->getMessage()));
             return [];
@@ -316,6 +317,15 @@ class GlobalHelper {
     }
 
     public function getTimelineIdViaName(string $timeline): int {
+        try {
+            return TimelineLookUp::where('timeline', $timeline)->pluck('id')[0];
+        } catch (Exception $e) {
+            Log::channel('info')->info(json_encode($e->getMessage()));
+            return 0;
+        }
+    }
+
+    public function getBusinessTimelineIdViaName(string $timeline): int {
         try {
             return BusinessTimelineLookUp::where('timeline', $timeline)->pluck('id')[0];
         } catch (Exception $e) {

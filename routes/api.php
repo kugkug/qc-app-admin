@@ -37,6 +37,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('create-order/{ref_no}', [ApplicationsController::class, 'createPaymentOrder'])->name('api_create_payment_order');
         Route::post('update/{ref_no}', [ApplicationsController::class, 'updatePaymentOrder'])->name('api_create_payment_order_update');
         Route::post('business-create/{ref_no}', [BusinessController::class, 'createPaymentOrder'])->name('api_create_payment_order_business');
+        Route::post('business-update/{ref_no}', [BusinessController::class, 'updatePaymentOrder'])->name('api_update_payment_order_business');
     });
     
 });

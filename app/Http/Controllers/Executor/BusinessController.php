@@ -50,7 +50,7 @@ class BusinessController extends Controller
 
             globalHelper()->updateBusinessStatusViaRefNo(
                 $ref_no, 
-                config('system.application_status')['created_payment']
+                config('system.application_status')['validated_requirements']
             );
             
             $html_response = "$('#modal-payment-order').modal('hide'); _systemAlert('info', 'Payment Order Created!')";
