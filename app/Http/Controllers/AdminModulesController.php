@@ -171,9 +171,9 @@ class AdminModulesController extends Controller {
         $end_date = Carbon::parse($date[1])->endOfDay()->format('Y-m-d H:i:s');
 
         $applications = Application::whereBetween('created_at', [$start_date, $end_date])
-        
         ->with('user', 'classification', 'application_type', 'industry', 'sub_industry', 'business_line', 'payment')
         ->get();
+
 
         // Create CSV and download
 
@@ -204,6 +204,7 @@ class AdminModulesController extends Controller {
         // Write the header
         fputcsv($file, $columns);
 
+        if ($applications->count() > 0) {
         foreach ($applications as $app) {
             fputcsv($file, [
                 $app->application_ref_no ?? '',
@@ -212,17 +213,19 @@ class AdminModulesController extends Controller {
                 $app->industry->industry ?? '',
                 $app->sub_industry->sub_industry ?? '',
                 $app->business_line->business_line_name ?? '',
-                $app->user->first_name . ' ' . $app->user->last_name ?? '',
-                $app->user->contact_number ?? '',
-                $app->user->email ?? '',
+                $app->user ? $app->user->first_name . ' ' . $app->user->last_name : '',
+                $app->user ? $app->user->contact_number : 'N/A',
+                $app->user ? $app->user->email : 'N/A',
                 $app->company_name ?? '',
                 $app->company_address ?? '',
                 $app->created_at ? \Carbon\Carbon::parse($app->created_at)->format('Y-m-d') : '',
             ]);
+            }
+            
         }
-        fclose($file);
-        $file = ob_get_clean();
 
+        fclose($file);
+            $file = ob_get_clean();
         $script = '
                 $("body").append(\'<a id="download_csv" href="data:text/csv;charset=utf-8,' . urlencode($file) . '" download="health_certificates_report.csv">Download CSV</a>\');
                 $("#download_csv").click(function() {

@@ -62,25 +62,33 @@
 					<p>Payment Validation</p>
 				</a>
 				</li>
-				<li class="nav-item">
+				{{-- <li class="nav-item">
 				<a href="/applications/validated" class="nav-link">
 					<i class="far fa-circle nav-icon"></i>
 					<p>Validated</p>
-				</a>
+				</a> --}}
 				</li>
-				<li class="nav-item">
+				{{-- <li class="nav-item">
 					<a href="/applications/rejected" class="nav-link">
 						<i class="far fa-circle nav-icon"></i>
 						<p>Rejected</p>
 					</a>
-				</li>
-					<li class="nav-item">
-						<a href="/applications/completed" class="nav-link">
+				</li> --}}
+				{{-- <li class="nav-item">
+					<a href="/applications/completed" class="nav-link">
 						<i class="far fa-circle nav-icon"></i>
-					<p>
-						Completed
-					</p>
-				</a>
+						<p>
+							Completed
+						</p>
+					</a>
+				</li> --}}
+				<li class="nav-item">
+					<a href="/applications/head-approval" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>
+							Head Approval
+						</p>
+					</a>
 				</li>
 				<li class="nav-item">
 					<a href="/applications/released" class="nav-link">
@@ -90,14 +98,7 @@
 						</p>
 					</a>
 				</li>
-				<li class="nav-item">
-					<a href="/applications/head-approval" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>
-							Head Approval
-						</p>
-					</a>
-				</li>
+				
 			</ul>
 		</li>
 
@@ -134,7 +135,7 @@
 						<p>Payment Validation</p>
 					</a>
 				</li>
-				<li class="nav-item">
+				{{-- <li class="nav-item">
 					<a href="/businesses/validated" class="nav-link">
 						<i class="far fa-circle nav-icon"></i>
 						<p>Validated</p>
@@ -153,6 +154,14 @@
 							Completed
 						</p>
 					</a>
+				</li> --}}
+				<li class="nav-item">
+					<a href="/businesses/head-approval" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>
+							Head Approval
+						</p>
+					</a>
 				</li>
 				<li class="nav-item">
 					<a href="/businesses/released" class="nav-link">
@@ -162,14 +171,7 @@
 						</p>
 					</a>
 				</li>
-				<li class="nav-item">
-					<a href="/businesses/head-approval" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>
-							Head Approval
-						</p>
-					</a>
-				</li>
+				
 			</ul>
 		</li>
 
@@ -233,7 +235,7 @@
 		</li>
 
 		<li class="nav-item">
-			<a href="/generate_report" class="nav-link">
+			<a href="/generate-report" class="nav-link">
 				<i class="nav-icon fas fa-file-excel"></i>
 				<p>
 				Generate Report
