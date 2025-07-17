@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ApplicationsController;
 use App\Http\Controllers\Api\BusinessController;
+use App\Http\Controllers\Api\ComplaintsController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,4 +41,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('business-update/{ref_no}', [BusinessController::class, 'updatePaymentOrder'])->name('api_update_payment_order_business');
     });
     
+    Route::group(['prefix' => 'complaints'], function() {
+        Route::post('recommendation-first/{complaint_ref_no}', [ComplaintsController::class, 'recommendation_first'])->name('api_recommendation_first_complaint');
+        Route::post('recommendation-second/{complaint_ref_no}', [ComplaintsController::class, 'recommendation_second'])->name('api_recommendation_second_complaint');
+        Route::post('recommendation-third/{complaint_ref_no}', [ComplaintsController::class, 'recommendation_third'])->name('api_recommendation_third_complaint');
+        Route::post('head-approval/{complaint_ref_no}', [ComplaintsController::class, 'head_approval'])->name('api_head_approval_complaint');
+        Route::post('resolved/{complaint_ref_no}', [ComplaintsController::class, 'resolved'])->name('api_resolved_complaint');
+    });
 });

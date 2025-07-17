@@ -15,6 +15,8 @@ use App\Models\BusinessRequirementLookUp;
 use App\Models\BusinessTimelineLookUp;
 use App\Models\RequirementLookUp;
 use App\Models\TimelineLookUp;
+use App\Models\ComplaintRequirementLookUp;
+use App\Models\ComplaintTimelineLookUp;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -64,6 +66,8 @@ class GlobalHelper {
             return BusinessRequirementLookUp::orderBy('id', 'asc')->get()->toArray();
         } catch (Exception $e) { return []; }
     }
+
+    
 
     public function updateApplicationStatusViaRefNo(string $ref_no, int $status): void {
         try {
@@ -154,6 +158,27 @@ class GlobalHelper {
         }
     }
 
+    public function getComplaintsAll() {
+        try {
+            $complaints = Complaint::orderBy('created_at', 'desc')
+            ->with('histories')
+            ->get()->toArray();
+
+            if ($complaints) {
+                return [
+                    'status' => true,
+                    'complaints' => $complaints,
+                ];
+            }
+        } catch (Exception $e) {
+            Log::channel('info')->info(json_encode($e->getMessage()));
+            return [
+                'status' => false,
+                'complaints' => [],
+            ];
+        }
+    }
+
     public function getApplicationsViaStatus(string $status) {
         try {            
             $applications = Application::where('application_status', $status)
@@ -212,6 +237,33 @@ class GlobalHelper {
         }
     }
 
+    public function getComplaintsViaStatus(string $status) {
+        try {
+            $complaints = Complaint::where('status', $status)
+            ->orderBy('created_at', 'desc')
+            ->with('histories')
+            ->get()->toArray();
+
+            if ($complaints) {
+                return [
+                    'status' => true,
+                    'complaints' => $complaints,
+                ];
+            }
+
+            return [
+                'status' => false,
+                'complaints' => [],
+            ];
+        } catch (Exception $e) {
+            Log::channel('info')->info(json_encode($e->getMessage()));
+            return [
+                'status' => false,
+                'complaints' => [],
+            ];
+        }
+    }   
+
     public function getApplicationViaRefNo(string $ref_no) {
         try {
             $application = Application::where('application_ref_no', $ref_no)
@@ -257,6 +309,22 @@ class GlobalHelper {
         }
     }
 
+    public function getComplaintViaRefNo(string $ref_no) {
+        try {
+            $complaint = Complaint::where('complaint_ref_no', $ref_no)
+            ->with('histories')
+            ->get();
+
+            if ($complaint) {
+                return $complaint->toArray()[0];
+            }
+            return [];
+        } catch (Exception $e) {
+            Log::channel('info')->info(json_encode($e->getMessage()));
+            return [];
+        }
+    }
+
     public function getApplicationsViaUserId(int $user_id) {
         try {
             $applications = Application::where('user_id', $user_id)
@@ -297,6 +365,17 @@ class GlobalHelper {
         }
     }
 
+    public function logComplaintHistory(string $complaint_ref_no, string $timeline): void {
+        try {
+            History::create([
+                'application_ref_no' => $complaint_ref_no,
+                'timeline_look_up_id' => $this->getComplaintTimelineIdViaName($timeline),
+            ]);
+        } catch (Exception $e) {
+            Log::channel('info')->info(json_encode($e->getMessage()));
+        }
+    }
+
     public function getHistory(string $ref_no): array {
         try {
             $app_histories = [];
@@ -328,6 +407,15 @@ class GlobalHelper {
     public function getBusinessTimelineIdViaName(string $timeline): int {
         try {
             return BusinessTimelineLookUp::where('timeline', $timeline)->pluck('id')[0];
+        } catch (Exception $e) {
+            Log::channel('info')->info(json_encode($e->getMessage()));
+            return 0;
+        }
+    }
+
+    public function getComplaintTimelineIdViaName(string $timeline): int {
+        try {
+            return ComplaintTimelineLookUp::where('timeline', $timeline)->pluck('id')[0];
         } catch (Exception $e) {
             Log::channel('info')->info(json_encode($e->getMessage()));
             return 0;

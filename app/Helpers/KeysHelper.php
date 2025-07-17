@@ -43,6 +43,10 @@ class KeysHelper {
         'Notes' => 'notes',
 
         'PaymentInformation' => 'payment_information',
+
+        'RecommendationFirst' => 'recommendation_first',
+        'RecommendationSecond' => 'recommendation_second',
+        'RecommendationThird' => 'recommendation_third',
     ];
     
     public function getKey(string $key_index): string {

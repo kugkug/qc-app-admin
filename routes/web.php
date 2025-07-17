@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AdminModulesController;
 use App\Http\Controllers\BusinessModulesController;
+use App\Http\Controllers\ComplaintsModulesController;
 use App\Http\Controllers\Executor\ApplicationsController;
 use App\Http\Controllers\Executor\BusinessController;
+use App\Http\Controllers\Executor\ComplaintsController;
 use App\Http\Controllers\Executor\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +27,7 @@ Route::middleware([
             Route::get("/rejected", [AdminModulesController::class, 'rejected'])->name('rejected');
             Route::get("/completed", [AdminModulesController::class, 'completed'])->name('completed');
             Route::get("/released", [AdminModulesController::class, 'released'])->name('released');
-            Route::get("/customer-complaints", [AdminModulesController::class, 'customer_complaints'])->name('customer_complaints');
+            
         });
 
         Route::group(['prefix' => 'businesses'], function() {
@@ -52,6 +54,26 @@ Route::middleware([
             Route::get("/payment-created/{application_ref_no}", [BusinessModulesController::class, 'view_payment_created'])->name('view_payment_created_business');
             Route::get("/head-approval/{application_ref_no}", [BusinessModulesController::class, 'review_approval'])->name('review_approval_business');
         });
+
+        Route::group(['prefix' => 'complaints'], function() {
+            Route::get("/all", [ComplaintsModulesController::class, 'all'])->name('complaints');
+            Route::get("/processing", [ComplaintsModulesController::class, 'processing'])->name('complaints_processing');
+            Route::get("/recommendation-first", [ComplaintsModulesController::class, 'recommendation_first'])->name('complaints_recommendation_first');
+            Route::get("/recommendation-second", [ComplaintsModulesController::class, 'recommendation_second'])->name('complaints_recommendation_second');
+            Route::get("/recommendation-third", [ComplaintsModulesController::class, 'recommendation_third'])->name('complaints_recommendation_third');
+            Route::get("/head-approval", [ComplaintsModulesController::class, 'head_approval'])->name('complaints_head_approval');
+            Route::get("/resolved", [ComplaintsModulesController::class, 'resolved'])->name('complaints_resolved');
+
+            Route::group(['prefix' => 'processing'], function() {
+                Route::get("/process/{complaint_ref_no}", [ComplaintsModulesController::class, 'process_complaint'])->name('complaints_process');
+                Route::get("/recommendation-first/{complaint_ref_no}", [ComplaintsModulesController::class, 'process_recommendation_first'])->name('complaints_process_recommendation_first');
+                Route::get("/recommendation-second/{complaint_ref_no}", [ComplaintsModulesController::class, 'process_recommendation_second'])->name('complaints_process_recommendation_second');
+                Route::get("/recommendation-third/{complaint_ref_no}", [ComplaintsModulesController::class, 'process_recommendation_third'])->name('complaints_process_recommendation_third');
+                Route::get("/head-approval/{complaint_ref_no}", [ComplaintsModulesController::class, 'process_head_approval'])->name('complaints_process_head_approval');
+                Route::get("/resolved/{complaint_ref_no}", [ComplaintsModulesController::class, 'process_resolved'])->name('complaints_process_resolved');
+                Route::get("/completed/{complaint_ref_no}", [ComplaintsModulesController::class, 'process_completed'])->name('complaints_process_completed');
+            });
+        });
         
         Route::get("/generate-report", [AdminModulesController::class, 'generate_report'])->name('generate_report');
 });
@@ -75,6 +97,14 @@ Route::group(['prefix' => 'executor'], function() {
         Route::post('update/{ref_no}', [ApplicationsController::class, 'updatePaymentOrder'])->name('exec_update_payment_order');
         Route::post('business-create/{ref_no}', [BusinessController::class, 'createPaymentOrder'])->name('exec_create_payment_order_business');
         Route::post('business-update/{ref_no}', [BusinessController::class, 'updatePaymentOrder'])->name('exec_update_payment_order_business');
-        
     });
+
+    Route::group(['prefix' => 'complaints'], function() {
+        Route::post('recommendation-first/{ref_no}', [ComplaintsController::class, 'recommendation_first'])->name('exec_recommendation_first_complaint');
+        Route::post('recommendation-second/{ref_no}', [ComplaintsController::class, 'recommendation_second'])->name('exec_recommendation_second_complaint');
+        Route::post('recommendation-third/{ref_no}', [ComplaintsController::class, 'recommendation_third'])->name('exec_recommendation_third_complaint');
+        Route::post('head-approval/{ref_no}', [ComplaintsController::class, 'head_approval'])->name('exec_head_approval_complaint');
+        Route::post('resolved/{ref_no}', [ComplaintsController::class, 'resolved'])->name('exec_resolved_complaint');
+    });
+    
 });

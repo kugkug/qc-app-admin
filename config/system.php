@@ -36,6 +36,28 @@ return [
         99 => 'Completed',
     ],
 
+    'complaint_status' => [
+        'application_form' => 1,
+        'uploaded_requirements' => 2,
+        'processing' => 3,
+        'recommendation-first' => 4,
+        'recommendation-second' => 5,
+        'recommendation-third' => 6,
+        'head_approval' => 7,
+        'resolved' => 8,
+    ],
+
+    'complaint_progress_status' => [
+        1 => 'Application Created',
+        2 => 'Requirements Uploaded',
+        3 => 'In-Progress',
+        4 => 'Recommendation-First',
+        5 => 'Recommendation-Second',
+        6 => 'Recommendation-Third',
+        7 => 'For Head Approval',
+        8 => 'Resolved',
+    ],
+    
     'requirement_status' => [
         1 => 'For Review',
         2 => 'Completed',

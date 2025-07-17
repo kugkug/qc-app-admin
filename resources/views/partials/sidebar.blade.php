@@ -174,6 +174,65 @@
 		</li>
 
 		<li class="nav-item">
+			<a href="#" class="nav-link">
+				<i class="nav-icon fas fa-user-injured"></i>
+				<p>
+					Complaints
+					<i class="right fas fa-angle-left"></i>
+				</p>
+			</a>
+			<ul class="nav nav-treeview">
+				{{-- <li class="nav-item">
+					<a href="/complaints/all" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>All</p>
+					</a>
+				</li> --}}
+				<li class="nav-item">
+					<a href="/complaints/processing" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>Processing</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/complaints/recommendation-first" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>Recommendation 1</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/complaints/recommendation-second" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>Recommendation 2</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/complaints/recommendation-third" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>Recommendation 3</p>
+					</a>
+				</li>
+				
+				<li class="nav-item">
+					<a href="/complaints/head-approval" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>
+							Head Approval
+						</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/complaints/resolved" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>
+						Resolved
+						</p>
+					</a>
+				</li>
+			</ul>
+		</li>
+
+		<li class="nav-item">
 			<a href="/applications/generate_report" class="nav-link">
 				<i class="nav-icon fas fa-file-excel"></i>
 				<p>

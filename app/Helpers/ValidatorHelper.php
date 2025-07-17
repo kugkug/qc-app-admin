@@ -144,6 +144,15 @@ class ValidatorHelper {
                     'application_status' => 'sometimes|integer',
                 ];
             break;
+
+            case 'update_complaint':
+                return [
+                    'status' => 'sometimes|string',
+                    'recommendation_first' => 'sometimes|string',
+                    'recommendation_second' => 'sometimes|string',
+                    'recommendation_third' => 'sometimes|string',
+                ];
+            break;
             
         }
     }
