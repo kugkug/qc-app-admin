@@ -69,16 +69,16 @@
 				</a>
 				</li>
 				<li class="nav-item">
-				<a href="/applications/rejected" class="nav-link">
-					<i class="far fa-circle nav-icon"></i>
-					<p>Rejected</p>
-				</a>
+					<a href="/applications/rejected" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>Rejected</p>
+					</a>
 				</li>
-				<li class="nav-item">
-				<a href="/applications/completed" class="nav-link">
-					<i class="far fa-circle nav-icon"></i>
+					<li class="nav-item">
+						<a href="/applications/completed" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
 					<p>
-					Completed
+						Completed
 					</p>
 				</a>
 				</li>
@@ -242,10 +242,10 @@
 		</li>
 
 		<li class="nav-item">
-			<a href="/applications/customer-complaints" class="nav-link">
-				<i class="nav-icon fas fa-user-injured"></i>
+			<a href="/users/all" class="nav-link">
+				<i class="nav-icon fas fa-users"></i>
 				<p>
-				Customer Complaints
+				Users
 				</p>
 			</a>
 		</li>

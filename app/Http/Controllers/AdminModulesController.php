@@ -14,7 +14,13 @@ class AdminModulesController extends Controller {
     }
 
     public function dashboard() {
-        return view("pages.dashboard")->with(['page_name' => "Dashboard"]);
+        $this->data['page_name'] = "Dashboard";
+        $this->data['applications'] = globalHelper()->getApplicationsAll()['applications'];
+        $this->data['businesses'] = globalHelper()->getBusinessesAll()['businesses'];
+        $this->data['complaints'] = globalHelper()->getComplaints()['complaints'];
+        $this->data['users'] = globalHelper()->getUsersAll()['users'];
+
+        return view("pages.dashboard", $this->data);
     }
 
     public function applications() {
@@ -117,8 +123,6 @@ class AdminModulesController extends Controller {
         return view('pages.head_approval.index', $this->data);
     }
     
-    
-    
     public function rejected() {
         return view('pages.rejected.index')->with(['page_name' => 'Rejected']);
     }
@@ -126,9 +130,6 @@ class AdminModulesController extends Controller {
     public function validated() {
         return view('pages.validated.index')->with(['page_name' => 'Validated']);
     }
-
-    
-
     
     public function completed() {
         return view('pages.completed.index')->with(['page_name' => 'Completed']);
@@ -150,5 +151,15 @@ class AdminModulesController extends Controller {
 
         return view('pages.customer_complaints.index', $this->data);
     }
+
+
+    public function users_all() {
+        $users = globalHelper()->getUsersAll();
+
+        $this->data['users'] = $users['users'];
+        $this->data['page_name'] = 'Users';
+
+        return view('pages.users.index', $this->data);
+    }   
     
 }

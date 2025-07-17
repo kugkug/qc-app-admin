@@ -17,6 +17,7 @@ use App\Models\RequirementLookUp;
 use App\Models\TimelineLookUp;
 use App\Models\ComplaintRequirementLookUp;
 use App\Models\ComplaintTimelineLookUp;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -534,6 +535,29 @@ class GlobalHelper {
                 'status' => false,
                 'complaints' => [],
             ];
+        }
+    }
+
+    public function getUsersAll() {
+        try {
+            $users = User::orderBy('created_at', 'desc')->get()->toArray();
+            
+            if ($users) {
+                return [
+                    'status' => true,
+                    'users' => $users,
+                ];
+            }
+
+            return [
+                'status' => true,
+                'users' => [],
+            ];
+
+
+        } catch (Exception $e) {
+            Log::channel('info')->info(json_encode($e->getMessage()));
+            return [];
         }
     }
 }

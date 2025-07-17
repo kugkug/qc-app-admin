@@ -17,6 +17,11 @@ Route::middleware([
     'prevent_back',
 ])->group(function() {
         Route::get("/dashboard", [AdminModulesController::class, 'dashboard'])->name('dashboard');
+
+        Route::group(['prefix' => 'users'], function() {
+            Route::get("/all", [AdminModulesController::class, 'users_all'])->name('users_all');
+        });
+
         Route::group(['prefix' => 'applications'], function() {
             Route::get("/all", [AdminModulesController::class, 'applications'])->name('applications');
             Route::get("/for-review", [AdminModulesController::class, 'for_review'])->name('for_review');
