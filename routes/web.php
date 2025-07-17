@@ -81,6 +81,8 @@ Route::middleware([
         });
         
         Route::get("/generate-report", [AdminModulesController::class, 'generate_report'])->name('generate_report');
+        Route::post("/generate_report/health_certificates", [AdminModulesController::class, 'generate_health_certificates_report'])->name('generate_health_certificates_report');
+        Route::post("/generate_report/sanitary_permits", [AdminModulesController::class, 'generate_sanitary_permits_report'])->name('generate_sanitary_permits_report');
 });
 
 Route::group(['prefix' => 'executor'], function() {

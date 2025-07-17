@@ -233,7 +233,7 @@
 		</li>
 
 		<li class="nav-item">
-			<a href="/applications/generate_report" class="nav-link">
+			<a href="/generate_report" class="nav-link">
 				<i class="nav-icon fas fa-file-excel"></i>
 				<p>
 				Generate Report

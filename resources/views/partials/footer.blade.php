@@ -38,4 +38,5 @@
 <script src="{{ asset('assets/adminlte3.2/plugins/confirm/js/jquery-confirm.js') }}"></script>
 
 
+
 <script src="{{ asset('assets/adminlte3.2/dist/js/adminlte.js') }}"></script>

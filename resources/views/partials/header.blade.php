@@ -11,18 +11,17 @@
     
 
     <link rel="stylesheet" href="{{ asset('assets/adminlte3.2/plugins/fontawesome-free/css/all.min.css') }} ">
-	<link rel="stylesheet" href="{{ asset('assets/adminlte3.2/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
   	<link rel="stylesheet" href="{{ asset('assets/adminlte3.2/plugins/toastr/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/adminlte3.2/plugins/confirm/css/jquery-confirm.css') }}">
   	<link rel="stylesheet" href="{{ asset('assets/adminlte3.2/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
-  	<link rel="stylesheet" href="{{ asset('assets/adminlte3.2/plugins/daterangepicker/daterangepicker.css') }}">
   	<link rel="stylesheet" href="{{ asset('assets/adminlte3.2/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
   	<link rel="stylesheet" href="{{ asset('assets/adminlte3.2/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}"> 
   	<link rel="stylesheet" href="{{ asset('assets/adminlte3.2/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('assets/adminlte3.2/plugins/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/adminlte3.2/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
   	<link rel="stylesheet" href="{{ asset('assets/adminlte3.2/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/styles/styles.css') }}">
 
-    
 
     <title>Dashboard | {{ $app_name }}</title>
 </head>

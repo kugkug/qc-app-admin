@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Application;
+use App\Models\Business;
+use Carbon\Carbon;
 
 class AdminModulesController extends Controller {
 
@@ -161,5 +164,136 @@ class AdminModulesController extends Controller {
 
         return view('pages.users.index', $this->data);
     }   
+
+    public function generate_health_certificates_report(Request $request) {
+        $date = explode(' - ', $request->date);
+        $start_date = Carbon::parse($date[0])->startOfDay()->format('Y-m-d H:i:s');
+        $end_date = Carbon::parse($date[1])->endOfDay()->format('Y-m-d H:i:s');
+
+        $applications = Application::whereBetween('created_at', [$start_date, $end_date])
+        
+        ->with('user', 'classification', 'application_type', 'industry', 'sub_industry', 'business_line', 'payment')
+        ->get();
+
+        // Create CSV and download
+
+        // Define the CSV headers
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="health_certificates_report.csv"',
+        ];
+
+        // Prepare the CSV data
+        $columns = [
+            'Reference No',
+            'Type',
+            'Classification',
+            'Industry',
+            'Sub Industry',
+            'Business Line',
+            'Applicant Name',
+            'Contact Number',
+            'Email',
+            'Company Name',
+            'Company Address',
+            'Date Applied',
+        ];
+
+        
+        $file = fopen('php://output', 'w');
+        // Write the header
+        fputcsv($file, $columns);
+
+        foreach ($applications as $app) {
+            fputcsv($file, [
+                $app->application_ref_no ?? '',
+                $app->application_type->application ?? '',
+                $app->classification->classification ?? '',
+                $app->industry->industry ?? '',
+                $app->sub_industry->sub_industry ?? '',
+                $app->business_line->business_line_name ?? '',
+                $app->user->first_name . ' ' . $app->user->last_name ?? '',
+                $app->user->contact_number ?? '',
+                $app->user->email ?? '',
+                $app->company_name ?? '',
+                $app->company_address ?? '',
+                $app->created_at ? \Carbon\Carbon::parse($app->created_at)->format('Y-m-d') : '',
+            ]);
+        }
+        fclose($file);
+        $file = ob_get_clean();
+
+        $script = '
+                $("body").append(\'<a id="download_csv" href="data:text/csv;charset=utf-8,' . urlencode($file) . '" download="health_certificates_report.csv">Download CSV</a>\');
+                $("#download_csv").click(function() {
+                    window.location.href = $(this).attr("href");
+                    $(this).remove();
+                });
+
+                $("#download_csv").click();
+            
+        ';
+
+        return response()->json($script );
+    }
+
+    public function generate_sanitary_permits_report(Request $request) {
+        $date = explode(' - ', $request->date);
+        $start_date = Carbon::parse($date[0])->startOfDay()->format('Y-m-d H:i:s');
+        $end_date = Carbon::parse($date[1])->endOfDay()->format('Y-m-d H:i:s');
+
+        $businesses = Business::whereBetween('created_at', [$start_date, $end_date])
+        ->with('user', 'application_type', 'industry', 'sub_industry')
+        ->get();
+
+        return response()->json($businesses);
+        
+        $columns = [
+            'Reference No',
+            'Type',
+            'Industry',
+            'Sub Industry',
+            'Business Line',
+            'Establishment Name',
+            'Establishment Address',
+            'Establishment Owner',
+            'Date Applied',
+        ];
+
+        
+        $file = fopen('php://output', 'w');
+        // Write the header
+        fputcsv($file, $columns);
+
+        foreach ($businesses as $business) {
+            fputcsv($file, [
+                $business->application_ref_no ?? '',
+                $business->application_type->application ?? '',
+                $business->industry->industry ?? '',
+                $business->sub_industry->sub_industry ?? '',
+                $business->business_line_text ?? '',
+                $business->company_name ?? '',
+                $business->company_address ?? '',
+                $business->company_owner ?? '',
+                $business->created_at ? \Carbon\Carbon::parse($business->created_at)->format('Y-m-d') : '',
+            ]);
+        }
+        fclose($file);
+        $file = ob_get_clean();
+
+        $script = '
+                $("body").append(\'<a id="download_csv" href="data:text/csv;charset=utf-8,' . urlencode($file) . '" download="sanitary_permits_report.csv">Download CSV</a>\');
+                $("#download_csv").click(function() {
+                    window.location.href = $(this).attr("href");
+                    $(this).remove();
+                });
+
+                $("#download_csv").click();
+            
+        ';
+
+        return response()->json($script );
+    }
+    
     
 }
