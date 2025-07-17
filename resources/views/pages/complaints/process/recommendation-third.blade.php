@@ -17,13 +17,20 @@
             <div class="card-footer">
                 <div class="row">
                     
-                    <div class="col-md-6 d-flex">
+                    <div class="col-md-12 d-flex justify-content-between">
                         {{-- <button class="btn btn-outline-danger btn-flat mr-2">Requires Update</button> --}}
                         <button class="btn btn-outline-primary btn-flat btn-add-recommendation" 
                             data-status="recommendation-first" 
                             data-ref-no="{{ $complaint['complaint_ref_no'] }}"
                         >
                             Add Recommendation
+                        </button>
+
+                        <button class="btn btn-outline-success btn-flat btn-apply-for-head-approval" 
+                            data-status="head_approval" 
+                            data-ref-no="{{ $complaint['complaint_ref_no'] }}"
+                        >
+                            Apply For Head Approval
                         </button>
                     </div>
                 </div>
@@ -58,6 +65,8 @@
                     >
                         <i class="fas fa-check"></i> Submit
                     </button>
+
+                    
                 </div>
             </div>
         </div>
