@@ -44,7 +44,11 @@ $(document).ready(function () {
 
             ajaxRequest(
                 "/executor/requirement/update/" + data_id,
-                { Status: data_status, Notes: $("[data-key=Notes]").val() },
+                {
+                    Status: data_status,
+                    Notes: $("[data-key=Notes]").val(),
+                    RefNo: $(this).attr("data-ref-no"),
+                },
                 $(this)
             );
         });
