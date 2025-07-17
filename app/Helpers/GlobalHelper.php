@@ -154,7 +154,7 @@ class GlobalHelper {
             Log::channel('info')->info(json_encode($e->getMessage()));
             return [
                 'status' => false,
-                'applications' => [],
+                'businesses' => [],
             ];
         }
     }
