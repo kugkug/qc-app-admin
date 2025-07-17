@@ -18,6 +18,7 @@
                             <tr>
                                 <th>Reference No.</th>
                                 <th>Summary</th>
+                                <th>Sentiment</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -27,6 +28,7 @@
                                     <tr>
                                         <td class="align-middle"> {{$complaint['complaint_ref_no']}} </td>
                                         <td class="align-middle"> {{Str::limit($complaint['complaint_description'], 20)}} </td>
+                                        <td class="align-middle"> {{$complaint['sentiments']}} </td>
                                         <td class="align-middle">
                                             <a href="/complaints/processing/resolved/{{$complaint['complaint_ref_no']}}" 
                                                 class="btn btn-outline-primary btn-flat"
