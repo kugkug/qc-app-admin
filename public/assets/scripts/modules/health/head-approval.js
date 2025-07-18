@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    enablePaymentOrder();
     if ($(".btn-preview").length) {
         $(".btn-preview").off();
         $(".btn-preview").on("click", function (e) {
@@ -98,3 +99,19 @@ $(document).ready(function () {
         });
     }
 });
+
+function enablePaymentOrder() {
+    let statuses = $(".td-status");
+    let status_len = statuses.length;
+    let approve_text = $(".btn-head-approve").attr("data-status-text");
+    let cntr = 0;
+    for (let status of statuses) {
+        let status_text = $(status).text().trim();
+        if (status_text === approve_text) {
+            cntr++;
+        }
+    }
+
+    if (cntr === status_len) $(".btn-head-approve").attr("disabled", false);
+    else $(".btn-head-approve").attr("disabled", true);
+}

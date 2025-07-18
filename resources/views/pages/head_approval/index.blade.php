@@ -110,6 +110,7 @@
                     class="btn btn-outline-success btn-flat btn-head-approve" 
                     data-status="{{ $approve_app_status }}"
                     data-ref-no="{{ $application_ref_no }}"
+                    data-status-text="Completed" disabled=""
                 >
                     Approve
                 </button>

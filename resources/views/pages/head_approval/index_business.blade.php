@@ -188,6 +188,7 @@
                         class="btn btn-outline-danger btn-flat btn-require-update-payment"
                         data-status="{{ $reject_key_payment }}"
                         data-ref-no="{{ $application_ref_no }}"
+                        data-status-text="Completed" disabled=""
                     >
                         Requires Update
                     </button>
