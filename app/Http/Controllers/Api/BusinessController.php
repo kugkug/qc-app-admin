@@ -92,9 +92,9 @@ class BusinessController extends Controller
             
             Payment::updateOrCreate(['application_ref_no' => $ref_no], $validated['validated']);
 
-            $business = globalHelper()->getBusinessViaRefNo($ref_no);
+            // $business = globalHelper()->getBusinessViaRefNo($ref_no);
 
-            globalHelper()->logHistory($ref_no, 'Payment Validation');
+            // globalHelper()->logHistory($ref_no, 'Payment Validation');
             
             DB::commit();
 

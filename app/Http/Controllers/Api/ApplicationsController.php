@@ -153,6 +153,7 @@ class ApplicationsController extends Controller
             Payment::updateOrCreate(['application_ref_no' => $ref_no], $validated['validated']);
             
             globalHelper()->logHistory($ref_no, 'Requirements Validation');
+            globalHelper()->logHistory($ref_no, 'Order of Payment');
 
             DB::commit();
 
@@ -180,9 +181,6 @@ class ApplicationsController extends Controller
             
             Payment::updateOrCreate(['application_ref_no' => $ref_no], $validated['validated']);
 
-            $application = globalHelper()->getApplicationViaRefNo($ref_no);
-
-            globalHelper()->logHistory($ref_no, 'Payment Validation');
             
             DB::commit();
 

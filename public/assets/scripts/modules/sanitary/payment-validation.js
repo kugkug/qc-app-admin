@@ -55,4 +55,30 @@ $(document).ready(function () {
             );
         });
     }
+
+    if ($(".btn-require-update").length) {
+        $(".btn-require-update").off();
+        $(".btn-require-update").on("click", function (e) {
+            let data_id = $(this).attr("data-id");
+            $(".btn-submit-note").attr("data-id", $(this).attr("data-id"));
+            $("#modal-notes").modal("show");
+        });
+    }
+
+    if ($(".btn-submit-note").length) {
+        $(".btn-submit-note").off();
+        $(".btn-submit-note").on("click", function (e) {
+            let data_ref_no = $(this).attr("data-ref-no");
+            let data_status = $(this).attr("data-status");
+
+            ajaxRequest(
+                "/executor/payment/update/" + data_ref_no,
+                {
+                    Status: data_status,
+                    Notes: $("[data-key=Notes]").val(),
+                },
+                $(this)
+            );
+        });
+    }
 });

@@ -130,6 +130,7 @@ class ValidatorHelper {
                 return [
                     'payment_information' => 'sometimes|string',
                     'status' => 'sometimes|integer',
+                    'notes' => 'sometimes|string',
                 ];
             break;
 

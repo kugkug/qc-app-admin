@@ -65,6 +65,7 @@ class BusinessController extends Controller
     public function updatePaymentOrder($ref_no, Request $request) {
         
         try {
+            $status = $request->Status;
             $response = apiHelper()->execute($request, "/api/payment/business-update/$ref_no", 'POST');
 
             if ($response['status'] == false) {
@@ -73,12 +74,21 @@ class BusinessController extends Controller
                     globalHelper()->ajaxErrorResponse('');
             }
 
-            globalHelper()->updateBusinessStatusViaRefNo(
-                $ref_no, 
-                config('system.application_status')['validated_payment']
-            );
+            if ($status == config('system.payment_status')['rejected']) {
+                globalHelper()->updateApplicationStatusViaRefNo(
+                    $ref_no, 
+                    config('system.application_status')['created_payment']
+                );
+                $html_response = "$('#modal-notes').modal('hide'); _systemAlert('alert', 'Payment Rejected!')";
+            } else {
+                globalHelper()->logHistory($ref_no, 'Payment Validation');
+                globalHelper()->updateApplicationStatusViaRefNo(
+                    $ref_no, 
+                    config('system.application_status')['validated_payment']
+                );
+                $html_response = "$('#modal-payment-preview').modal('hide'); _systemAlert('info', 'Payment Validated!')";
+            }
             
-            $html_response = "$('#modal-payment-preview').modal('hide'); _systemAlert('info', 'Payment Validated!')";
             return globalHelper()->ajaxSuccessResponse($html_response);
 
         } catch (Exception $e) {

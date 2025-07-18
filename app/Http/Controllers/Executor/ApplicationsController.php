@@ -22,15 +22,15 @@ class ApplicationsController extends Controller
             }
 
             $html_response = "location.reload();";
-            if ((int) $request->Status === array_keys(config('system.requirement_status'), 'Completed')[0]) {
+            // if ((int) $request->Status === array_keys(config('system.requirement_status'), 'Completed')[0]) {
 
-            } else {
-                globalHelper()->updateApplicationStatusViaRefNo(
-                    $request->RefNo, 
-                    config('system.application_status')['uploaded_requirements']
-                );
+            // } else {
+                // globalHelper()->updateApplicationStatusViaRefNo(
+                //     $request->ref_no, 
+                //     config('system.application_status')['uploaded_requirements']
+                // );
 
-            }
+            // }
 
             return globalHelper()->ajaxSuccessResponse($html_response);
 
@@ -53,7 +53,7 @@ class ApplicationsController extends Controller
 
             globalHelper()->updateApplicationStatusViaRefNo(
                 $ref_no, 
-                config('system.application_status')['validated_requirements']
+                config('system.application_status')['created_payment']
             );
             
             $html_response = "$('#modal-payment-order').modal('hide'); _systemAlert('info', 'Payment Order Created!')";
@@ -68,6 +68,8 @@ class ApplicationsController extends Controller
     public function updatePaymentOrder($ref_no, Request $request) {
         
         try {
+
+            $status = $request->Status;
             $response = apiHelper()->execute($request, "/api/payment/update/$ref_no", 'POST');
 
             if ($response['status'] == false) {
@@ -75,13 +77,23 @@ class ApplicationsController extends Controller
                     globalHelper()->ajaxErrorResponse($response['response']) :
                     globalHelper()->ajaxErrorResponse('');
             }
-
-            globalHelper()->updateApplicationStatusViaRefNo(
-                $ref_no, 
-                config('system.application_status')['validated_payment']
-            );
             
-            $html_response = "$('#modal-payment-preview').modal('hide'); _systemAlert('info', 'Payment Validated!')";
+            if ($status == config('system.payment_status')['rejected']) {
+                globalHelper()->updateApplicationStatusViaRefNo(
+                    $ref_no, 
+                    config('system.application_status')['created_payment']
+                );
+                $html_response = "$('#modal-notes').modal('hide'); _systemAlert('alert', 'Payment Rejected!')";
+            } else {
+                globalHelper()->logHistory($ref_no, 'Payment Validation');
+                globalHelper()->updateApplicationStatusViaRefNo(
+                    $ref_no, 
+                    config('system.application_status')['validated_payment']
+                );
+                $html_response = "$('#modal-payment-preview').modal('hide'); _systemAlert('info', 'Payment Validated!')";
+            }            
+            
+            
             return globalHelper()->ajaxSuccessResponse($html_response);
 
         } catch (Exception $e) {

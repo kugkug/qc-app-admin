@@ -15,6 +15,8 @@
                         @php
                     
                             $approve_key = config('system.payment_status')['approved'];
+                            $reject_key = config('system.payment_status')['rejected'];
+                            
                             $app_url = config('system.app_client_url');
                             $requirements = [];
                             foreach ($application['requirements'] as $requirement) {
@@ -162,9 +164,34 @@
                     >
                         Approve
                     </button>
-                    {{-- <button class="btn btn-outline-danger btn-flat btn-require-update">
+                    <button class="btn btn-outline-danger btn-flat btn-require-update">
                         Requires Update
-                    </button> --}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog"  id="modal-notes">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Note</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>×</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex justify-content-center align-items-center">
+                    <textarea class="form-control rounded-0" cols="30" rows="10" data-key="Notes"></textarea>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button 
+                        class="btn btn-outline-danger btn-flat btn-block btn-submit-note"
+                        data-status="{{ $reject_key }}"
+                        data-ref-no="{{ $application_ref_no }}"
+                    >
+                        Submit Note
+                    </button>
                 </div>
             </div>
         </div>

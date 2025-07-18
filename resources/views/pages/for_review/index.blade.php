@@ -41,6 +41,7 @@
                                         $status_class = config('system.requirement_status_class')[$status_text];
                                         $status = $requirements[$requirement_type['id']]['photo'] ? $status_text : 'No Upload'
                                     @endphp
+                                    
                                     <tr>
                                         <td class="align-middle">{{ $requirement_type['title'] }}</td>
                                         <td class="text-center align-middle td-status {{ $status_class }}" id="td-status-{{$requirements[$requirement_type['id']]['id']}}"> 
