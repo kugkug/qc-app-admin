@@ -19,6 +19,7 @@
                             $approve_app_status = config('system.application_status')['released'];
                             $approve_key = config('system.payment_status')['approved'];
                             $reject_key = array_keys(config('system.requirement_status'), 'Requires Update')[0];
+                            $reject_key_payment = config('system.payment_status')['rejected'];
                             $app_url = config('system.app_client_url');
                             $requirements = [];
                             foreach ($business['requirements'] as $requirement) {
@@ -108,6 +109,7 @@
                     class="btn btn-outline-success btn-flat btn-head-approve" 
                     data-status="{{ $approve_app_status }}"
                     data-ref-no="{{ $application_ref_no }}"
+                                            data-status-text="Completed" disabled=""
                 >
                     Approve
                 </button>
@@ -188,7 +190,6 @@
                         class="btn btn-outline-danger btn-flat btn-require-update-payment"
                         data-status="{{ $reject_key_payment }}"
                         data-ref-no="{{ $application_ref_no }}"
-                        data-status-text="Completed" disabled=""
                     >
                         Requires Update
                     </button>

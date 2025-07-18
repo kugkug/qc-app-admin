@@ -21,14 +21,14 @@ class BusinessController extends Controller
             }
 
             $html_response = "location.reload();";
-            if ((int) $request->Status === array_keys(config('system.requirement_status'), 'Completed')[0]) {
+            // if ((int) $request->Status === array_keys(config('system.requirement_status'), 'Completed')[0]) {
                 
-            } else {
-                globalHelper()->updateApplicationStatusViaRefNo(
-                    $request->RefNo, 
-                    config('system.application_status')['uploaded_requirements']
-                );
-            }
+            // } else {
+            //     globalHelper()->updateApplicationStatusViaRefNo(
+            //         $request->RefNo, 
+            //         config('system.application_status')['uploaded_requirements']
+            //     );
+            // }
 
             return globalHelper()->ajaxSuccessResponse($html_response);
 

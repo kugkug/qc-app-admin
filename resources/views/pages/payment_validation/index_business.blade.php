@@ -15,7 +15,7 @@
                         @php
                     
                             $approve_key = config('system.payment_status')['approved'];
-                            $reject_key = config('system.payment_status')['requires-update'];
+                            $reject_key = config('system.payment_status')['rejected'];
                             $app_url = config('system.app_client_url');
                             $requirements = [];
                             foreach ($business['requirements'] as $requirement) {
