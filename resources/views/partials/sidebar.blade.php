@@ -123,12 +123,12 @@
 						<p>For Review</p>
 					</a>
 				</li>
-				<li class="nav-item">
+				{{-- <li class="nav-item">
 					<a href="/businesses/payment-created" class="nav-link">
 						<i class="far fa-circle nav-icon"></i>
 						<p>Payment Created</p>
 					</a>
-				</li>
+				</li> --}}
 				<li class="nav-item">
 					<a href="/businesses/payment-validation" class="nav-link">
 						<i class="far fa-circle nav-icon"></i>

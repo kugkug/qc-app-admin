@@ -21,6 +21,20 @@ $(document).ready(function () {
         });
     }
 
+    if ($(".btn-approve").length) {
+        $(".btn-approve").off();
+        $(".btn-approve").on("click", function (e) {
+            let data_id = $(this).attr("data-id");
+            let data_status = $(this).attr("data-status");
+
+            ajaxRequest(
+                "/executor/requirement/business-update/" + data_id,
+                { Status: data_status },
+                $(this)
+            );
+        });
+    }
+
     if ($(".btn-head-approve").length) {
         $(".btn-head-approve").off();
         $(".btn-head-approve").on("click", function (e) {

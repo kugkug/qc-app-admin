@@ -12,6 +12,21 @@ $(document).ready(function () {
             $("#modal-preview").modal("show");
         });
     }
+
+    if ($(".btn-approve").length) {
+        $(".btn-approve").off();
+        $(".btn-approve").on("click", function (e) {
+            let data_id = $(this).attr("data-id");
+            let data_status = $(this).attr("data-status");
+            console.log(data_id, data_status);
+            ajaxRequest(
+                "/executor/requirement/update/" + data_id,
+                { Status: data_status },
+                $(this)
+            );
+        });
+    }
+
     if ($(".btn-require-update").length) {
         $(".btn-require-update").off();
         $(".btn-require-update").on("click", function (e) {
