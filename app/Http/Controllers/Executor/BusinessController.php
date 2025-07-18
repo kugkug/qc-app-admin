@@ -79,7 +79,11 @@ class BusinessController extends Controller
                     $ref_no, 
                     config('system.application_status')['created_payment']
                 );
-                $html_response = "$('#modal-notes').modal('hide'); _systemAlert('alert', 'Payment Rejected!')";
+                $html_response = "
+                    $('#modal-notes').modal('hide'); 
+                    $('#modal-notes-payment').modal('hide');
+                    _systemAlert('alert', 'Payment Rejected!')
+                    ";
             } else {
                 globalHelper()->logHistory($ref_no, 'Payment Validation');
                 globalHelper()->updateApplicationStatusViaRefNo(

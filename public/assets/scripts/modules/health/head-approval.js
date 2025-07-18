@@ -67,4 +67,34 @@ $(document).ready(function () {
             $("#modal-payment-preview").modal("show");
         });
     }
+
+    if ($(".btn-require-update-payment").length) {
+        $(".btn-require-update-payment").off();
+        $(".btn-require-update-payment").on("click", function (e) {
+            let data_ref_no = $(this).attr("data-ref-no");
+            let data_status = $(this).attr("data-status");
+
+            $(".btn-submit-note-payment").attr(
+                "data-id",
+                $(this).attr("data-id")
+            );
+            $("#modal-notes-payment").modal("show");
+        });
+    }
+    if ($(".btn-submit-note-payment").length) {
+        $(".btn-submit-note-payment").off();
+        $(".btn-submit-note-payment").on("click", function (e) {
+            let data_ref_no = $(this).attr("data-ref-no");
+            let data_status = $(this).attr("data-status");
+
+            ajaxRequest(
+                "/executor/payment/update/" + data_ref_no,
+                {
+                    Status: data_status,
+                    Notes: $("[data-key=Notes]").val(),
+                },
+                $(this)
+            );
+        });
+    }
 });

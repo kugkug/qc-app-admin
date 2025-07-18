@@ -19,6 +19,7 @@
             
                             $approve_app_status = config('system.application_status')['released'];
                             $approve_key = config('system.payment_status')['approved'];
+                            $reject_key_payment = config('system.payment_status')['rejected'];
                             $reject_key = array_keys(config('system.requirement_status'), 'Requires Update')[0];
                             $app_url = config('system.app_client_url');
                             $requirements = [];
@@ -209,7 +210,41 @@
                     </div>
 
                 </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button 
+                        class="btn btn-outline-danger btn-flat btn-require-update-payment"
+                        data-status="{{ $reject_key_payment }}"
+                        data-ref-no="{{ $application_ref_no }}"
+                    >
+                        Requires Update
+                    </button>
+                </div>
                 
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog"  id="modal-notes-payment">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Note</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>×</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex justify-content-center align-items-center">
+                    <textarea class="form-control rounded-0" cols="30" rows="10" data-key="Notes"></textarea>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button 
+                        class="btn btn-outline-danger btn-flat btn-block btn-submit-note-payment"
+                        data-status="{{ $reject_key_payment }}"
+                        data-ref-no="{{ $application_ref_no }}" 
+                    >
+                        Submit Note
+                    </button>
+                </div>
             </div>
         </div>
     </div>
