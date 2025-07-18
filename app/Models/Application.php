@@ -36,7 +36,7 @@ class Application extends Model
     }
 
     public function histories(): HasMany {
-        return $this->hasMany(History::class, 'application_id', 'id');
+        return $this->hasMany(History::class, 'application_ref_no', 'application_ref_no');
     }
 
     public function user(): HasOne {
